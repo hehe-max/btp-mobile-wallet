@@ -4,3 +4,6 @@
 /android/app/build/
 /android/app/my-release-key.keystore
 /android/build/
+/package-lock.json
+/android/app/debug.keystore
+/shim.js
