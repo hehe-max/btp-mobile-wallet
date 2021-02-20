@@ -52,7 +52,7 @@ export default class PageHeader extends Component {
         // const pageThis = props.this ?? {};
 
         //header样式
-        const style = {width: css.width, height: css.header.height, ...props.style ?? {}};
+        const style = {width: css.width, height: css.header.height};
         //底部线条
         if (css.header.line) {
             style.borderBottomWidth = 0.5;
@@ -78,7 +78,7 @@ export default class PageHeader extends Component {
             console.log('PageHeader-titleStyle', titleStyle);
         }
 
-        return <View style={[css.rowBetweenCenter, style]}>
+        return <View style={[css.rowBetweenCenter, style, props.style ?? {}]}>
             <View style={{width: (css.width * 0.25)}}>
                 {leftView}
             </View>
