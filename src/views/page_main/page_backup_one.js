@@ -69,7 +69,7 @@ export default class page_backup_one extends Component {
 
             <View style={{paddingHorizontal: 15, paddingVertical: 20}}>
                 <Page.Text text={'下一步'} style={css.btnStyle} onPress={() =>
-                    new Nav(this).go('BackupTwo', {mnemonic: this.mnemonic})}/>
+                    new Nav().go( 'BackupTwo', {mnemonic: this.mnemonic})}/>
             </View>
         </Page.Render>
     }

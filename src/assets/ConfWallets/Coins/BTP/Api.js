@@ -39,4 +39,17 @@ export default class Api {
         return new Fetch().get(url, {address, size, p});
     }
 
+    //获取utxo
+    getUtxo(addr, amount, fees) {
+        const url = `${this.#getHost()}v1/utxo?address={addr}&amount={amount}&fees={fees}`;
+        return new Fetch().get(url, {addr, amount, fees});
+    }
+
+    //发送交易
+    postTx(rawtx, address, note) {
+        const url = `${this.#getHost()}v1/transaction`;
+        return new Fetch().post(url, {rawtx, address, note});
+    }
+
+
 }

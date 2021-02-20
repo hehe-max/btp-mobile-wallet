@@ -35,22 +35,21 @@ export default class page_create extends Component {
             <Page.Slide style={{paddingHorizontal: 15}}>
                 <View>
                     <Page.Text text={'钱包密码'} size={16} t={15}/>
-                    <TextInput style={css.inputStyle} ref={'pwd'} maxLength={20}
+                    <TextInput style={css.inputLineStyle} ref={'pwd'} maxLength={20}
                                password={true} secureTextEntry={true}
                                placeholder={'请输入6~20位密码'} placeholderTextColor={css.font.minor}
                                onChangeText={val => this.setState({pwd: val})}/>
                 </View>
                 <View>
                     <Page.Text text={'确认密码'} size={16} t={15}/>
-                    <TextInput style={css.inputStyle} ref={'confirm'} maxLength={20}
+                    <TextInput style={css.inputLineStyle} ref={'confirm'} maxLength={20}
                                password={true} secureTextEntry={true}
                                placeholder={'请输入6~20位确认密码'} placeholderTextColor={css.font.minor}
                                onChangeText={val => this.setState({confirm: val})}/>
                 </View>
                 <View>
                     <Page.Text text={'密码提示'} size={16} t={15}/>
-                    <TextInput style={css.inputStyle} ref={'tips'} maxLength={20}
-                               password={true} secureTextEntry={true}
+                    <TextInput style={css.inputLineStyle} ref={'tips'} maxLength={20}
                                placeholder={'选填'} placeholderTextColor={css.font.minor}
                                onChangeText={val => this.setState({tips: val})}/>
                 </View>
@@ -72,7 +71,7 @@ export default class page_create extends Component {
                             console.log(wallets);
                             setTimeout(() => {
                                 new Loading().hide();
-                                new Nav(this).go('Backup', {mnemonic});
+                                new Nav().go( 'Backup', {mnemonic});
                             }, 100);
                         })
                     });

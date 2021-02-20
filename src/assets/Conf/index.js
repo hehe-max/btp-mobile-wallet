@@ -25,6 +25,8 @@ conf.AppWallets = 'AppWallets';
 conf.AppNickName = 'AppNickName';
 //头像
 conf.AppAvatar = 'AppAvatar';
+//地址本
+conf.AppNotepad = 'AppNotepad';
 
 
 conf.phonePrefix = [

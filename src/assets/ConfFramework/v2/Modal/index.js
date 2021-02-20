@@ -1,5 +1,5 @@
 import React from "react";
-import {View} from "react-native";
+import {View, TextInput} from "react-native";
 import init from './init';
 import Redux from "../Redux";
 import Page from "../Page";
@@ -12,6 +12,8 @@ export default class Modal {
     #lang = new Language().all('framework') ?? {};
     #type = init.type;                  // 缓存的数据类型
     #data = init.data;                  // 数据
+
+    #btnLineColor = `#e1e1e1`;          //线条颜色
 
     #widthRatio = init.widthRatio;      //modal 宽度比例
 
@@ -36,7 +38,7 @@ export default class Modal {
     };
     //获取配置content
     #getContent = (value, style, textStyle) => {
-        if (!textStyle) textStyle = {}
+        if (!textStyle) textStyle = {};
         let contentView = <View/>;
         if (typeof value === "string")
             contentView = <Page.Text text={value} lineHeight={textStyle.lineHeight ?? 24}
@@ -56,23 +58,27 @@ export default class Modal {
             return arr.map((item, key) => {
                 let params = {};
                 if (key > 0) {
-                    if (direction === Modal.type.row) params.btn = {borderLeftWidth: 0.5, borderLeftColor: '#ccc'};
-                    else params.btn = {borderTopWidth: 0.5, borderTopColor: '#ccc'};
+                    if (direction === Modal.type.row) params.btn = {
+                        borderLeftWidth: 0.5,
+                        borderLeftColor: this.#btnLineColor
+                    };
+                    else params.btn = {borderTopWidth: 0.5, borderTopColor: this.#btnLineColor};
                 }
-                console.log(item);
                 return <Page.Text key={key} text={item.text ?? ''} width={width}
                                   lineHeight={48} color={item.color ?? '#666'}
                                   style={[{backgroundColor: item.bg ?? '#fff', textAlign: 'center'}, params.btn ?? {}]}
                                   onPress={() => {
-                                      if (typeof item.onPress === "function") item.onPress();
-                                      return this.hide();
+                                      this.hide();
+                                      setTimeout(() => {
+                                          if (typeof item.onPress === "function") item.onPress();
+                                      }, 1);
                                   }}/>
             })
         };
         let btnStyle = {
             borderWidth: 1,
             borderColor: '#fff',
-            borderTopColor: '#ccc',
+            borderTopColor: this.#btnLineColor,
             overflow: 'hidden',
             borderBottomStartRadius: 8,
             borderBottomEndRadius: 8
@@ -158,7 +164,7 @@ export default class Modal {
     }
 
     hide() {
-        new Redux({log: true}).update(this.#data, {
+        new Redux().update(this.#data, {
             type: 0,
         })
     }
@@ -187,15 +193,44 @@ export default class Modal {
         })
     }
 
-    confirmPwd(content, func) {
+    confirmPwd(func) {
         const nameData = this.#getName(Modal.names.confirmPwd);
         const btn = nameData.btn ?? [];
-        btn.map(item => item.onPress = () => typeof func === "function" ? func(Tools.copy(item)) : undefined);
+        let password = '';
+        const content = <TextInput style={{
+            width: this.#css.width - 15 * 10, height: 40,
+            paddingHorizontal: 15, color: '#808080',
+            borderWidth: 1, borderColor: '#e1e1e1',
+            borderRadius: 5, backgroundColor: '#fff',
+        }} password={true} secureTextEntry={true} autoFocus={true} onChangeText={pwd => password = pwd.toString()}/>;
+        btn.map(item => item.onPress = () => typeof func === "function" ? func(Tools.copy({
+            ...item, password
+        })) : undefined);
         new Redux().update(this.#data, {
             type: 1,
             title: this.#getTitle(nameData.title, nameData.titleStyle),
             content: this.#getContent(content, nameData.contentStyle, nameData['contentTextStyle']),
             btn: this.#getBtn(btn, nameData.type),
         })
+    }
+
+    isOne(res) {
+        return res.id && res.id === Modal.id.one
+    }
+
+    isTwo(res) {
+        return res.id && res.id === Modal.id.two
+    }
+
+    isThree(res) {
+        return res.id && res.id === Modal.id.three
+    }
+
+    isFour(res) {
+        return res.id && res.id === Modal.id.four
+    }
+
+    isFive(res) {
+        return res.id && res.id === Modal.id.five
     }
 }

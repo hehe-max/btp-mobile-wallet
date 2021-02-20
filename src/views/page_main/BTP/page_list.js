@@ -102,17 +102,18 @@ export default class page_wallet_list extends Component {
                 params.value = '失败';
                 params.color = '#fb2740';
             }
-            return <Page.Text key={key} onPress={() => new Nav(this).go('WalletDetail_BTP', {data: item})}>
+            return <Page.Text key={key} style={[styles.borderBottom,]}
+                              onPress={() => new Nav().go( 'WalletDetail_BTP', {data: item})}>
                 <View style={css.rowBetweenCenter}>
                     <View>
                         <Page.Text text={params.value} color={params.color} lineHeight={26}/>
-                        <Page.Text text={Tools.formatDate(item.data)} color={css.font.minor} size={12} lineHeight={24}/>
+                        <Page.Text text={Tools.formatDate(item.time)} color={css.font.minor} size={12} lineHeight={24}/>
                     </View>
                     <Page.Text text={Tools.amount(item.amount)} lineHeight={22} size={16} style={{fontWeight: 'bold'}}/>
                 </View>
-                <View style={styles.item}>
-                    <page.text text={Tools.cutString(item.addr, 15)} lineHeight={20} size={12}/>
-                    <page.icon size={14} name={'gengduo'} color={css.font.minor}/>
+                <View style={styles.itemAddr}>
+                    <Page.Text text={Tools.cutString(item.addr, 15)} lineHeight={20} size={12}/>
+                    <Page.Icon size={14} name={'cardb'} color={css.font.minor}/>
                 </View>
             </Page.Text>
         })
@@ -143,15 +144,15 @@ export default class page_wallet_list extends Component {
                 </View>
             </ImageBackground>
             <View style={[css.innerRadius, {marginTop: -30}]}>
-                <View style={css.rowAroundCenter}>{this.tabsView()}</View>
+                <View style={[css.rowAroundCenter, styles.borderBottom]}>{this.tabsView()}</View>
                 <Page.Slide style={{padding: 15}}>
                     {this.itemView()}
                 </Page.Slide>
                 <View style={[css.rowBetweenCenter, {padding: 15}]}>
                     <Page.Text text={'收 款'} style={[styles.btn, styles.btn2]}
-                               onPress={() => new Nav(this).go('QrCode', {id: this.id})}/>
+                               onPress={() => new Nav().go( 'QrCode', {id: this.id})}/>
                     <Page.Text text={'转 账'} style={[styles.btn]}
-                               onPress={() => new Nav(this).go('WalletTrading_BTP', {id: this.id})}/>
+                               onPress={() => new Nav().go( 'WalletTrading_BTP', {id: this.id})}/>
                 </View>
             </View>
         </Page.Render>
@@ -168,12 +169,13 @@ const styles = (css) => StyleSheet.create({
         borderColor: css.btn.bg2,
         color: css.font.white,
     },
-    item: {
+    borderBottom: {
+        borderBottomWidth: 0.5,
+        borderBottomColor: css.list.line,
+    },
+    itemAddr: {
         ...css.rowBetweenCenter,
-        backgroundColor: css.page.innerBg,
-        borderRadius: 5,
-        paddingVertical: 2,
-        paddingHorizontal: 5,
-        marginVertical: 7,
+        marginVertical: 5,
+        paddingBottom: 7,
     }
 });

@@ -99,18 +99,22 @@ const mavMain = class BottomNav extends React.Component {
                             height: css.nav.height,
                             ...css.rowAroundCenter,
                         };
-                        return <Page.Text key={key} onPress={() => navigation.navigate(item.name)}>
+                        return <Page.Text key={key} onPress={() => new Nav().go( item.name)}>
                             <View style={[itemStyle]}>
                                 <View style={css.colAroundCenter}>
                                     <Image source={params.icon} style={{width: 20, height: 20}}/>
-                                    <Page.Text text={params.text} t={8}/>
+                                    <Page.Text text={params.text} t={8} color={params.color}/>
                                 </View>
                             </View>
                         </Page.Text>
                     })
                 }
                 //nav总样式
-                const style = {width: css.width, height: css.nav.height, backgroundColor: css.nav.bg};
+                const style = {
+                    width: css.width, height: css.nav.height,
+                    backgroundColor: css.nav.bg,
+                    borderTopWidth: 0.5, borderTopColor: css.nav.line
+                };
                 if (Platform.OS === 'ios' && parseFloat(Platform.Version) >= 10) {
                     style.height = style.height + 15;
                     style.paddingBottom = 15;
@@ -153,6 +157,9 @@ export default class App extends React.Component {
                     mode={'modal'}
                     headerMode={'screen'}
                     cardOverlayEnabled={true}
+                    options={{
+                        backgroundColor: 'rgba(0,0,0,0)'
+                    }}
                     screenOptions={{
                         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,// 添加这一行会实现安卓下页面的左右切换，默认是从下到上
                         headerShown: false,//不显示导航

@@ -44,9 +44,9 @@ export default class page_start extends Component {
 
             <View style={{padding: 15}}>
                 <Page.Text text={'创建钱包'} style={[css.btnStyle, {marginBottom: 15}]}
-                           onPress={() => new Nav(this).go('Create')}/>
+                           onPress={() => new Nav().go( 'Create')}/>
                 <Page.Text text={'恢复钱包'} style={css.btnStyle}
-                           onPress={() => new Nav(this).go('Restore')}/>
+                           onPress={() => new Nav().go( 'Restore')}/>
             </View>
         </Page.Render>
     }

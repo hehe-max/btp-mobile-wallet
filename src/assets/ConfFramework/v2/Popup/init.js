@@ -19,7 +19,6 @@ export default class PopupInit extends Component {
 
     componentDidMount() {
         new Redux().listen(PopupInit.data, res => {
-            console.log(res);
             if (res.type === 0) {
                 /**
                  * 隐藏 modal

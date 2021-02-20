@@ -27,6 +27,11 @@ let images = {
 
     wallet_qrcode_bg: require(`${_host}wallet_qrcode_bg.png`),
     wallet_qrcode_scan: require(`${_host}wallet_qrcode_scan.png`),
+
+    wallet_detail_ok: require(`${_host}wallet_detail_ok.png`),
+    wallet_detail_fail: require(`${_host}wallet_detail_fail.png`),
+    wallet_detail_ongoing: require(`${_host}wallet_detail_ongoing.png`),
+    wallet_detail_unconfirmed: require(`${_host}wallet_detail_unconfirmed.png`),
 };
 
 

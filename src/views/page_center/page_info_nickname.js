@@ -5,8 +5,8 @@ import {Woma, Api, images} from '../../assets';
 
 const {Unmount, Language, Nav, Theme, Page, Tools} = Woma;
 
-export default class page_demo extends Component {
-    #name = 'page_demo';
+export default class page_info_nickname extends Component {
+    #name = 'page_info_nickname';
     #unmount = new Unmount(this.#name);
     #lang = new Language().get(this.#name);
     #css = new Theme().get();

@@ -20,7 +20,6 @@ export default class ModalInit extends Component {
 
     componentDidMount() {
         new Redux().listen(ModalInit.data, res => {
-            console.log(res);
             if (res.type === 0) {
                 /**
                  * 隐藏 modal

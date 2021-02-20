@@ -34,7 +34,7 @@ export default class page_backup extends Component {
             styles = this.#styles;
         return <Page.Render this={this}>
             <Page.Text text={'立即备份'} style={css.btnStyle} onPress={() =>
-                new Nav(this).go('BackupOne', {mnemonic: this.mnemonic})}/>
+                new Nav().go( 'BackupOne', {mnemonic: this.mnemonic})}/>
         </Page.Render>
     }
 }

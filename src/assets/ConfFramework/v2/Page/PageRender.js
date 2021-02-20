@@ -22,6 +22,7 @@ export default class PageRender extends Component {
          *  headerStyle     header 样式
          *  headerLeft      header 左侧图标
          *  headerRight     header 右侧图标
+         *  barBg           bar 背景
          */
         super(props);
     }
@@ -38,7 +39,7 @@ export default class PageRender extends Component {
         //redux 监听
         new Redux().listen(Navigation.headerBar, res => {
             StatusBar.setBarStyle(res);
-        });
+        })
     }
 
     componentWillUnmount() {
@@ -85,8 +86,11 @@ export default class PageRender extends Component {
 
         const isBar = typeof props.isBar === 'boolean' ? props.isBar : true,
             isHeader = typeof props.isHeader === 'boolean' ? props.isHeader : true;
+        const barStyle = {};
+        if (css.page.barBg) barStyle.backgroundColor = css.page.barBg;
+        if (props.barBg) barStyle.backgroundColor = props.barBg;
         //bar
-        const barView = isBar ? <View style={{width: css.width, height: css.headerBarHeight}}/> : <View/>;
+        const barView = isBar ? <View style={{width: css.width, height: css.headerBarHeight, ...barStyle}}/> : <View/>;
         //header
         const headerView = isHeader ? <Header title={pageThis.title}
                                               style={props.headerStyle ?? {}}

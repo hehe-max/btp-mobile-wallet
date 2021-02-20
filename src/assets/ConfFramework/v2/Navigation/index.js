@@ -1,5 +1,5 @@
 import React from "react";
-import {CommonActions} from '@react-navigation/native';
+import {CommonActions, NavigationContainer} from '@react-navigation/native';
 import Theme from "../Theme";
 import Page from "../Page";
 import Redux from "../Redux";
@@ -7,8 +7,8 @@ import Emitter from "../Emitter";
 
 export default class Navigation {
     #timer = 1;                                         //默认延时时间
-    #navLast = 'framework_nav_last';                    //最后一次导航操作
-    #getLastThis = () => new Redux().get(this.#navLast);
+    static navLast = 'framework_nav_last';                    //最后一次导航操作
+    #getLastThis = () => new Redux().get(Navigation.navLast);
     /**
      * 私有方法
      *  导航跳转统一处理
@@ -17,8 +17,6 @@ export default class Navigation {
      * @returns {*}
      */
     #navResult = (result, timer) => {
-        const redux = new Redux();
-        redux.update(this.#navLast, this.that);
         if (!timer) return result;
         const timeout = setTimeout(() => {
             clearTimeout(timeout);
@@ -41,14 +39,19 @@ export default class Navigation {
     });
 
 
-    constructor(that) {
-        this.that = that ?? this.#getLastThis();
+    constructor() {
+        this.that = this.#getLastThis();
     }
 
     init(params = {}) {
         const redux = new Redux();
         if (params.headerLeftIconName) redux.add(Navigation.headerLeftIconName, params.headerLeftIconName ?? '');
-        redux.add(this.#navLast, {});
+        redux.add(Navigation.navLast, {});
+    }
+
+    //写入this
+    setThis(that) {
+        new Redux().update(Navigation.navLast, that);
     }
 
     /**
@@ -88,21 +91,19 @@ export default class Navigation {
      */
     go(routeName, params, timer) {
         if (!this.that) return;
-        const {navigation} = this.that.props;
+        const {navigation, route} = this.that.props;
         params = params ?? {};
         return this.#navResult(navigation.navigate(routeName, params), timer);
     }
 
     /**
      * 返回
-     * @param routeName     页面名称
-     * @param timer         延时跳转时间
      * @returns {*}
      */
-    back(routeName, timer) {
+    back(timer) {
         if (!this.that) return;
-        const {navigation} = this.that.props;
-        return this.#navResult(navigation.goBack(routeName), timer);
+        const {navigation, route} = this.that.props;
+        return this.#navResult(navigation.goBack(), timer);
     }
 
     /**
@@ -146,7 +147,6 @@ export default class Navigation {
     }
 
     setHeaderBar(value) {
-        console.log(value);
         new Redux().update(Navigation.headerBar, value);
     }
 

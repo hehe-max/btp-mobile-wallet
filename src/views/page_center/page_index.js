@@ -18,11 +18,14 @@ export default class page_center extends Component {
         super(props);
         const {navigation, route} = props;
         this.items = [
-            {icon: images.avatar_1, name: '多语言', onPress: () => new Nav(this).go('Language')},
-            {icon: images.avatar_1, name: '地址本', onPress: () => new Nav(this).go('Language')},
-            {icon: images.avatar_1, name: '关于我们', onPress: () => new Nav(this).go('About')},
+            {icon: images.avatar_1, name: '多语言', onPress: () => new Nav().go( 'Language')},
+            {icon: images.avatar_1, name: '地址本', onPress: () => new Nav().go( 'Notepad')},
+            {icon: images.avatar_1, name: '关于我们', onPress: () => new Nav().go( 'About')},
         ];
         this.state = {};
+        navigation.addListener('tabPress', e => {
+            console.log(111111111);
+        });
     }
 
     componentDidMount() {
@@ -42,7 +45,7 @@ export default class page_center extends Component {
                     <Image source={item.icon} style={styles.icon}/>
                     <Page.Text text={item.name} l={15}/>
                 </View>
-                <Page.Icon name={'cardb'} size={30}/>
+                <Page.Icon name={'cardb'}/>
             </Page.Text>
         });
     }
@@ -51,7 +54,7 @@ export default class page_center extends Component {
         const css = this.#css,
             styles = this.#styles;
         return <Page.Base>
-            <Page.Render isHeader={false}>
+            <Page.Render this={this} isHeader={false}>
                 <Page.Text style={[css.rowBetweenCenter, {paddingHorizontal: 15, paddingVertical: 30}]}>
                     <View style={css.rowBetweenCenter}>
                         <Image source={images.avatar_1} style={{width: 50, height: 50}}/>
@@ -68,7 +71,7 @@ export default class page_center extends Component {
                             // new Wallets.Tools().removeWalletAll();
                             // new Wallets.Tools().removeWalletMnemonicAll();
                             // setTimeout(() => {
-                            //     new Nav(this).empty('PageIndex');
+                            //     new Nav().empty('PageIndex');
                             // }, 1000);
                         }}/>
                     </Page.Slide>

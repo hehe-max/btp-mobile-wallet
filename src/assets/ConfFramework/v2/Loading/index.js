@@ -133,13 +133,18 @@ export default class Loading {
     }
 
     //框架 complete
-    complete(content) {
+    complete(content, func) {
         const nameData = this.#getName(Loading.names.complete);
         new Redux().update(this.#data, {
             type: 1,
             content: content,
             image: this.#getImageChoose(nameData.type, nameData.value, nameData.style),
         })
+        if (typeof func === 'function') setTimeout(() => {
+            this.hide();
+            console.log(111);
+            func();
+        }, 1000);
     }
 
     //框架 error

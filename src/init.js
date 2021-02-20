@@ -12,7 +12,7 @@ Text.defaultProps = Object.assign({}, Text.defaultProps, {allowFontScaling: fals
 new Core().init();
 
 new Redux({log: false}).init([
-    {name: Nav.headerBar, value: Nav.barWhite},                         //导航Bar配色
+    {name: Nav.headerBar, value: Nav.barBlack},                         //导航Bar配色
     {name: Page.Icon.Name, value: Page.Icon.Init(confFonts)},           //字体
 ]);
 //皮肤
@@ -34,6 +34,7 @@ new Fetch().init([
 new Storage().init([
     {name: conf.AppAvatar, type: Storage.type.get, value: 'avatar_1'},      //头像
     {name: conf.AppNickName, type: Storage.type.get, value: 'nickname'},    //名称
+    {name: conf.AppNotepad, type: Storage.type.getJson, value: []},         //地址本
     //钱包，助记词
     {name: conf.AppWallets, type: Storage.type.getJson, value: {}},         //  钱包
     {name: conf.AppWalletsMnemonic, type: Storage.type.getJson, value: {}}, //  助记词

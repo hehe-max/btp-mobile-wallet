@@ -103,7 +103,12 @@ export default class Wallets {
         return crypto.createHash("md5").update(value.toString()).digest('hex');
     }
 
-    //加密
+    /**
+     * 加密
+     * @param value
+     * @param password
+     * @returns {string}
+     */
     encrypt(value, password) {
         let result = "";
         const cipher = crypto['createCipheriv']("aes-128-cbc", Buffer.from(password, "hex"), Buffer.from(this.toMD5("Wallet App"), "hex"));
@@ -112,7 +117,12 @@ export default class Wallets {
         return result;
     }
 
-    //解密
+    /**
+     * 解密
+     * @param value
+     * @param password
+     * @returns {string|boolean}
+     */
     decrypt(value, password) {
         let result = "";
         try {

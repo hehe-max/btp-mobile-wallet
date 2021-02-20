@@ -10,7 +10,7 @@ export default {
     getPath: new Wallet().getPath,
 
     Wallet,
-    // Trading,
-    // Api,
+    Trading,
+    Api,
     Verify,
 };

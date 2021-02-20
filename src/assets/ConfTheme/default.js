@@ -1,17 +1,17 @@
 let defStyle = {};
 
 defStyle.default = {
-    main: '#F1BA5A',
+    main: '#C9040D',
 };
 /**
  * 页面
  */
 defStyle.page = {
-    bg: '#151b2b',              //配置
-    barBg: '#151b2b',           //配置
-    maskBg: 'rgba(0,0,0,.3)',   //配置
-    line: '#757888',            //配置
-    innerBg: '#1f2131',
+    bg: '#f8f8f8',              //配置
+    barBg: '#fefefe',           //配置
+    maskBg: 'rgba(0,0,0,.1)',   //配置
+    line: '#E1E1E1',            //配置
+    innerBg: '#fdfcfc',
 };
 defStyle.popup = {
     maskBg: 'rgba(255,255,255,.1)',                 //配置
@@ -20,21 +20,21 @@ defStyle.popup = {
  * header 配置
  */
 defStyle.header = {
-    leftColor: '#fff',  //配置
-    color: '#fff',      //配置
+    leftColor: '#1F1F1F',  //配置
+    color: '#1F1F1F',      //配置
     height: 50,         //配置
-    bg: '#151b2b',      //配置
-    line: '#1b2137'     //线条颜色
+    bg: '#fefefe',      //配置
+    line: '#E1E1E1'     //线条颜色
 };
 /**
  * font 字体
  */
 defStyle.font = {
     size: 14,           //配置
-    color: '#fff',      //配置
-    minor: '#757888',
+    color: '#1F1F1F',      //配置
+    minor: '#898888',
     minor2: '#3c3e48',
-    main: '#F1BA5A',//主题色
+    main: '#C9040D',//主题色
     vice: '#25E79B',//副主题色
     dark: '#151B2B',//深色字体
     white: '#fff',
@@ -45,11 +45,11 @@ defStyle.font = {
  */
 defStyle.nav = {
     height: 65,
-    color: '#c2c1c8',
-    selectColor: '#F1BA5A',
-    bg: '#282c38',
-    selectBg: '#161a26',
-    border: '#28293d',
+    color: '#757779',
+    selectColor: '#C9040D',
+    bg: '#fff',
+    selectBg: '#fff',
+    line: '#d6d6d6',
 };
 
 /**
@@ -58,19 +58,19 @@ defStyle.nav = {
 defStyle.btn = {
     size: 16,
     height: 50,
-    bg: '#F1BA5A',
+    bg: '#C9040D',
     bg2: '#313541',
-    color: defStyle.font.dark,
-    color2: defStyle.font.white,
+    color: defStyle.font.white,
+    color2: defStyle.font.dark,
 };
 /**
  * list 样式
  */
 defStyle.list = {
     height: 50,
-    bg: '#292d3a',
+    bg: '#F0F3F8',
     bg2: '#292d38',
-    border: '#434350',
+    line: '#d7d7d7',
 };
 
 //按钮样式
@@ -99,7 +99,7 @@ defStyle.listStyle = {
     backgroundColor: defStyle.list.bg,
     height: defStyle.list.height,
     borderWidth: 0.5,
-    borderColor: defStyle.list.border,
+    borderColor: defStyle.list.line,
     overflow: 'hidden',
     paddingHorizontal: 15,
 };
@@ -110,7 +110,7 @@ defStyle.listRadiusStyle = {
 defStyle.listLineStyle = {
     height: defStyle.list.height,
     borderBottomWidth: 0.5,
-    borderBottomColor: defStyle.list.border,
+    borderBottomColor: defStyle.list.line,
     paddingHorizontal: 15,
 };
 
@@ -125,14 +125,13 @@ defStyle.noData = {
 //input
 defStyle.inputStyle = {
     height: defStyle.list.height,
-    borderBottomWidth: 0.5,
-    borderBottomColor: defStyle.page.line,
-    paddingHorizontal: 5,
     color: defStyle.font.color,
 };
 
-defStyle.inputDefaultStyle = {
+defStyle.inputLineStyle = {
     height: defStyle.list.height,
+    borderBottomWidth: 0.5,
+    borderBottomColor: defStyle.list.line,
     paddingHorizontal: 5,
     color: defStyle.font.color,
 };

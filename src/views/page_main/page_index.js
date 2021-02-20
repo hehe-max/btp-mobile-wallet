@@ -4,8 +4,8 @@ import {View, StyleSheet, ImageBackground} from 'react-native';
 import {Woma, conf, Api, images, Wallets,} from '../../assets';
 import {Image} from "react-native-svg";
 
-const {Unmount, Language, Redux, Nav, Theme, Page, Tools} = Woma;
-import QRCode from "react-native-qrcode-svg";
+const {Unmount, Language, Redux, Nav, Theme, Page, Tools, Popup} = Woma;
+
 
 export default class page_main extends Component {
     #name = 'page_main';
@@ -63,7 +63,7 @@ export default class page_main extends Component {
             let icon = <Page.Text text={Tools.getFromFirst(item.name).toLocaleUpperCase()} style={styles.icon}/>;
             if (images[`logo_${item.name}`]) icon = <Image source={images[`logo_${item.name}`]} style={styles.icon}/>;
             return <Page.Text key={key} onPress={() =>
-                new Nav(this).go(`WalletList_${selectWallet.type.toLocaleUpperCase()}`, {id: item.id})}>
+                new Nav().go( `WalletList_${selectWallet.type.toLocaleUpperCase()}`, {id: item.id})}>
                 <View style={[css.listRadiusStyle, css.rowBetweenCenter]}>
                     <View style={css.rowStartCenter}>
                         {icon}
@@ -83,7 +83,14 @@ export default class page_main extends Component {
         return <Page.Render this={this} isHeader={false} innerStyle={css.colStart}>
             <Page.Header left={<Page.Text text={'钱包'} size={18} l={15}/>}
                          right={<View style={css.rowStartCenter}>
-                             <Page.Icon name={'cardb'} size={20} r={15}/>
+                             <Page.Icon name={'cardb'} size={20} r={15} onPress={() => {
+                                 // new Popup().select([
+                                 //     {text: 'PMEER', type: 'pmeer'},
+                                 //     {text: 'TRX', type: 'trx'}
+                                 // ], res => {
+                                 //     console.log('res', res);
+                                 // }, {title: '请选择'});
+                             }}/>
                              <Page.Icon name={'cardb'} size={20} r={15}/>
                          </View>}/>
             <ImageBackground source={images[`wallet_${selectWallet.type.toLocaleLowerCase()}`]}
@@ -100,7 +107,7 @@ export default class page_main extends Component {
                 </View>
                 <View style={css.rowBetweenCenter}>
                     <Page.Text text={selectWallet.name} size={18}/>
-                    <Page.Icon name={'cardb'} size={20} onPress={() => new Nav(this).go('QrCode', {
+                    <Page.Icon name={'cardb'} size={20} onPress={() => new Nav().go( 'QrCode', {
                         id: selectWallet.token[0].id,
                     })}/>
                 </View>

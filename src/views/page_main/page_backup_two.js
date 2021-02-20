@@ -110,7 +110,7 @@ export default class page_backup_two extends Component {
 
         if (verifyText !== val) {
             if (state.errIndex + 1 >= state.errMaxIndex)
-                return new Modal().alert('助记词输入错误3次，请验证是否抄写正确', () => new Nav(this).back());
+                return new Modal().alert('助记词输入错误3次，请验证是否抄写正确', () => new Nav().back());
             this.setState({errIndex: this.state.errIndex + 1})
             return new Modal().alert(`${'助记词选择不正确'}，(${state.errIndex + 1} / ${state.errMaxIndex})`);
         }
@@ -133,7 +133,7 @@ export default class page_backup_two extends Component {
             });
         }
         new Wallets.Tools().setWallet(wallets);
-        new Nav(this).empty('Main');
+        new Nav().empty( 'Main');
     }
 
 

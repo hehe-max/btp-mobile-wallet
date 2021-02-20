@@ -152,8 +152,9 @@ export default class Popup {
         const styleLine = {borderBottomWidth: 0.5, borderBottomColor: '#ccc'};
         const itemView = () => {
             return arr.map((item, key) => {
-                return <Page.Text key={key} text={item[params.text] ?? item.text} color={'#666'} lineHeight={44}
-                                  style={[styleLine, {textAlign: 'center'}]} onPress={() => {
+                let itemStyle = key + 1 < arr.length ? styleLine : {};
+                return <Page.Text key={key} text={item[params.text] ?? item.text} color={'#666'} lineHeight={49}
+                                  style={[itemStyle, {textAlign: 'center'}]} onPress={() => {
                     if (typeof func === "function") func(key);
                     return this.hide();
                 }}/>
@@ -163,17 +164,23 @@ export default class Popup {
         let titleView = <Page.Text text={params.title ?? ''} lineHeight={30} color={'#666'}
                                    style={{textAlign: 'center', marginBottom: 15}}/>;
         //取消按钮
-        let cancelView = <Page.Text text={this.#lang['btn_cancel'] ?? '取消'} lineHeight={44} color={'#666'}
+        let cancelView = <Page.Text text={this.#lang['btn_cancel'] ?? '取消'} lineHeight={49} color={'#666'}
                                     style={[styleBorder, {marginTop: 15, textAlign: 'center'}]}
                                     onPress={() => this.hide()}/>;
         if (!params.title) titleView = <View/>;
         if (typeof params.isCancel === "boolean") if (!params.isCancel) cancelView = <View/>;
+        //计算滑动框高度
+        let slideHeight = this.#css.height * nameData.height - 50 - 60;
+        if (params.title) slideHeight = slideHeight - 40;
+        if (slideHeight > arr.length * 50) slideHeight = arr.length * 50;
         const dataView = <View style={[this.#css.colBetween, {flex: 1, padding: 15}]}>
-            {titleView}
-            <View style={[styleBorder, {flexGrow: 1, flex: 1}]}>
-                <Page.Slide style={[{padding: 15}]}>
-                    {itemView()}
-                </Page.Slide>
+            <View style={{flex: 1, flexGrow: 1}}>
+                {titleView}
+                <View style={[styleBorder, {height: slideHeight}]}>
+                    <Page.Slide style={[]}>
+                        {itemView()}
+                    </Page.Slide>
+                </View>
             </View>
             {cancelView}
         </View>
