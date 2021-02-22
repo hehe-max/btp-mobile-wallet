@@ -1,9 +1,15 @@
 const _host = './';
 const _hostAvatar = './avatar/';
 const _hostWallet = './wallet/';
+const _hostNav = './nav/';
 
 
 let images = {
+    nav_wallet: require(`${_hostNav}nav_wallet.png`),
+    nav_wallet_select: require(`${_hostNav}nav_wallet_select.png`),
+    nav_center: require(`${_hostNav}nav_center.png`),
+    nav_center_select: require(`${_hostNav}nav_center_select.png`),
+
     avatar_0: require(`${_host}avatar.png`),
     avatar_1: require(`${_hostAvatar}1.png`),
     avatar_2: require(`${_hostAvatar}2.png`),
@@ -32,6 +38,9 @@ let images = {
     wallet_detail_fail: require(`${_host}wallet_detail_fail.png`),
     wallet_detail_ongoing: require(`${_host}wallet_detail_ongoing.png`),
     wallet_detail_unconfirmed: require(`${_host}wallet_detail_unconfirmed.png`),
+
+
+    center_exit: require(`${_host}center_exit.png`),
 };
 
 

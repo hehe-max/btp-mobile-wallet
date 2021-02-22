@@ -3,7 +3,7 @@ import {View, StyleSheet, Image} from 'react-native';
 
 import {Woma, Api, images, Wallets} from '../../assets';
 
-const {Unmount, Language, Nav, Theme, Page, Tools, Emitter} = Woma;
+const {Unmount, Language, Nav, Theme, Page, Loading, Emitter} = Woma;
 
 export default class page_center extends Component {
     #name = 'page_center';
@@ -18,9 +18,9 @@ export default class page_center extends Component {
         super(props);
         const {navigation, route} = props;
         this.items = [
-            {icon: images.avatar_1, name: '多语言', onPress: () => new Nav().go( 'Language')},
-            {icon: images.avatar_1, name: '地址本', onPress: () => new Nav().go( 'Notepad')},
-            {icon: images.avatar_1, name: '关于我们', onPress: () => new Nav().go( 'About')},
+            {icon: images.avatar_1, name: '多语言', onPress: () => new Nav().go('Language')},
+            {icon: images.avatar_1, name: '地址本', onPress: () => new Nav().go('Notepad')},
+            {icon: images.avatar_1, name: '关于我们', onPress: () => new Nav().go('About')},
         ];
         this.state = {};
         navigation.addListener('tabPress', e => {
@@ -45,7 +45,7 @@ export default class page_center extends Component {
                     <Image source={item.icon} style={styles.icon}/>
                     <Page.Text text={item.name} l={15}/>
                 </View>
-                <Page.Icon name={'cardb'}/>
+                <Page.Icon name={'youjiantou'}/>
             </Page.Text>
         });
     }
@@ -60,7 +60,7 @@ export default class page_center extends Component {
                         <Image source={images.avatar_1} style={{width: 50, height: 50}}/>
                         <Page.Text text={'11111'} l={15}/>
                     </View>
-                    <Page.Icon name={'cardb'} size={30}/>
+                    {/*<Page.Icon name={'youjiantou'} size={30}/>*/}
                 </Page.Text>
                 <View style={css.innerRadius}>
                     <Page.Slide style={{padding: 15}}>
@@ -78,7 +78,24 @@ export default class page_center extends Component {
                 </View>
             </Page.Render>
             <Page.Popup this={this} id={this.#popup_exit} height={Page.Popup.height["50"]}>
-
+                <Page.Header title={'退出登录'}
+                             left={<Page.Icon name={'cuowu'} l={15} onPress={() =>
+                                 Page.Popup.hide(this, this.#popup_exit)}/>}/>
+                <View style={[css.colBetween, {flex: 1, padding: 15}]}>
+                    <View style={css.colAroundCenter}>
+                        <Image source={images.center_exit} style={{width: 120, height: 120}}/>
+                        <Page.Text text={'退出身份后将删除所有钱包数据，请务必确保所有钱包已备份。'}/>
+                    </View>
+                    <Page.Text text={'确定退出'} style={css.btnStyle} onPress={() => {
+                        new Loading().start('正在退出中');
+                        setTimeout(() => {
+                            Page.Popup.hide(this, this.#popup_exit);
+                            new Wallets.Tools().removeWalletAll();
+                            new Wallets.Tools().removeWalletMnemonicAll();
+                            new Loading().complete('退出成功', () => new Nav().empty('PageIndex'));
+                        }, 1000);
+                    }}/>
+                </View>
             </Page.Popup>
         </Page.Base>
     }

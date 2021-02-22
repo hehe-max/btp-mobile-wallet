@@ -88,10 +88,10 @@ const mavMain = class BottomNav extends React.Component {
                         const isFocused = state.index === key;
                         if (item.name === 'PageMain') {
                             params.text = '首页';
-                            params.icon = isFocused ? images.avatar_0 : images.avatar_1;
+                            params.icon = isFocused ? images.nav_wallet_select : images.nav_wallet;
                         } else if (item.name === 'PageCenter') {
                             params.text = '我的';
-                            params.icon = isFocused ? images.avatar_0 : images.avatar_1;
+                            params.icon = isFocused ? images.nav_center_select : images.nav_center;
                         }
                         if (isFocused) params.color = css.nav.selectColor;
                         const itemStyle = {
@@ -99,7 +99,7 @@ const mavMain = class BottomNav extends React.Component {
                             height: css.nav.height,
                             ...css.rowAroundCenter,
                         };
-                        return <Page.Text key={key} onPress={() => new Nav().go( item.name)}>
+                        return <Page.Text key={key} onPress={() => new Nav().go(item.name)}>
                             <View style={[itemStyle]}>
                                 <View style={css.colAroundCenter}>
                                     <Image source={params.icon} style={{width: 20, height: 20}}/>

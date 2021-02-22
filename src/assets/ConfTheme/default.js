@@ -14,7 +14,7 @@ defStyle.page = {
     innerBg: '#fdfcfc',
 };
 defStyle.popup = {
-    maskBg: 'rgba(255,255,255,.1)',                 //配置
+    maskBg: 'rgba(0,0,0,.1)',                 //配置
 }
 /**
  * header 配置

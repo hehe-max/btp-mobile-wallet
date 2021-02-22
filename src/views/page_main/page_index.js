@@ -92,15 +92,16 @@ export default class page_main extends Component {
                              imageStyle={{resizeMode: 'stretch'}}>
                 <View>
                     <View style={css.rowBetweenCenter}>
-                        <Page.Text text={selectWallet.name} size={18} color={css.font.white}/>
+                        <Page.Text text={selectWallet.name} size={20} color={css.font.white}/>
                         <Page.Icon name={'guanli'} color={css.font.white}/>
                     </View>
-                    <Page.Text text={Tools.cutString(selectWallet.address, 15)} color={css.font.minor}/>
+                    <Page.Text text={Tools.cutString(selectWallet.address, 15)} t={10} lineHeight={24}
+                               color={css.font.white}/>
                 </View>
                 <View>
                     <View style={css.rowStart}>
-                        <Page.Icon name={'ico'} size={24} color={css.font.white}/>
-                        <Page.Text text={'收款码'} lineHeight={32} l={10} color={css.font.minor}/>
+                        <Page.Icon name={'ico'} size={26} color={css.font.white}/>
+                        <Page.Text text={'收款码'} lineHeight={34} size={16} l={10} color={css.font.white}/>
                     </View>
                 </View>
             </ImageBackground>
@@ -116,7 +117,7 @@ export default class page_main extends Component {
 const styles = (css) => StyleSheet.create({
     imageBg: {
         width: css.width - 30,
-        height: (css.width - 30) * 0.335,
+        height: (css.width - 30) * 0.43,
         marginHorizontal: 15,
         padding: 15
     },
